@@ -14,7 +14,7 @@ const Search = () => {
                 const response = await axios.get("https://frontend-take-home-service.fetch.com/dogs/search?ageMin=5", {
                     withCredentials: true,
                 })
-                console.log(response); 
+                console.log(response.data); 
 
                 }
  

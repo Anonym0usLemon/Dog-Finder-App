@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Homepage from "./components/Search/Search";
-import NoPage from "./components/NoPage/NoPage";
+import PrivateRoutes from "./components/utils/PrivateRoutes";
+import AuthContext from "./context/auth-context";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
       <main className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/search" element={<Homepage />} />
-            <Route path="*" element={<NoPage />} />
+            <Route element={<PrivateRoutes />}>
+              <Route path="/" element={<Homepage />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </main>

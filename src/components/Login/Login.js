@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 import "./Login.scss";
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import AuthContext from "../../context/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [userInput, setUserInput] = useState({
@@ -10,7 +10,8 @@ const Login = () => {
         email: ""
     }); 
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const ctx = useContext(AuthContext);
+    const navigate = useNavigate(); 
 
     function inputChangeHandler(event, id) {
         const value = event.target.value
@@ -29,8 +30,8 @@ const Login = () => {
         }
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
         try {
             const response = await axios.post('https://frontend-take-home-service.fetch.com/auth/login', userInput, {
@@ -40,17 +41,17 @@ const Login = () => {
                 withCredentials: true, 
             });
             console.log(response.data);
-            setLoggedIn(true); 
+
+            if (response.data === "OK") {
+                ctx.onLogin(); 
+                console.log(ctx.isLoggedIn);
+                navigate("/"); 
+            }
+
         } catch (error) {
             console.error("Error:", error);
         }
     };
-
-    // Redirect user to homepage once they're logged in. 
-
-    if (loggedIn) {
-        return <Navigate to="/search" /> 
-    }
 
     return (
         <div className="login-modal">
