@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 const AuthContext = React.createContext({
-  isLoggedIn: false,
+  isLoggedIn: true,
   onLogin: () => {},
   onLogout: () => {},
 });
 
 export const AuthContextProvider = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   function login() {
     setIsLoggedIn(true);
