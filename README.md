@@ -4,6 +4,8 @@ Welcome to my Fetch Frontend Take-Home Exercise project! In this project, I've c
 
 Here are the key functionalities I've implemented:
 
+[Live Demo](https://anonym0uslemon.github.io/fetch-fe-challenge/)
+
 ## Features 
 
 ### User Authentication 
@@ -35,7 +37,7 @@ Here are the key functionalities I've implemented:
 
 ## Usage 
 
-To use this application, you can visit the [deployed site](https://anonym0uslemon.github.io/fetch-fe-challenge/){:target="_blank"} and follow these steps: 
+To use this application, you can visit the [deployed site](https://anonym0uslemon.github.io/fetch-fe-challenge/) and follow these steps: 
 
 1. Log in by providing your name and email.
 2. Start searching for dogs using the filters.
