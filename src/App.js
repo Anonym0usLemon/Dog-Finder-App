@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <main className="App">
-        <BrowserRouter>
+        <BrowserRouter basename="/fetch-fe-challenge/Home">
           <Header match={matchHandler}/>
           <Routes>
             <Route path="/fetch-fe-challenge" element={<Login />} />
