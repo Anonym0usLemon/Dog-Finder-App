@@ -66,7 +66,7 @@ const Login = () => {
             if (response.data === "OK") {
                 ctx.onLogin(); 
                 console.log(ctx.isLoggedIn);
-                navigate("/fetch-fe-challenge/Home"); 
+                navigate("/Home"); 
             }
 
         } catch (error) {

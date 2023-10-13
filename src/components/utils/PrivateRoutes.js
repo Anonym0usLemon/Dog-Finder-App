@@ -5,7 +5,7 @@ const PrivateRoutes = () => {
     const ctx = useContext(AuthContext);
 
     return (
-        ctx.isLoggedIn ? <Outlet/> : <Navigate to="/fetch-fe-challenge"/> 
+        ctx.isLoggedIn ? <Outlet/> : <Navigate to="/"/> 
     );
 }
 
