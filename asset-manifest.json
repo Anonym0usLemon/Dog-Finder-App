@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fetch-fe-challenge/login/static/css/main.06cf20aa.css",
+    "main.js": "/fetch-fe-challenge/login/static/js/main.ed752fbe.js",
+    "index.html": "/fetch-fe-challenge/login/index.html",
+    "main.06cf20aa.css.map": "/fetch-fe-challenge/login/static/css/main.06cf20aa.css.map",
+    "main.ed752fbe.js.map": "/fetch-fe-challenge/login/static/js/main.ed752fbe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.06cf20aa.css",
+    "static/js/main.ed752fbe.js"
+  ]
+}
