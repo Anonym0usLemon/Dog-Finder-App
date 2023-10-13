@@ -17,9 +17,9 @@ const Header = (props) => {
 
     return (
         <header>
-            <Link to="/Home">
+            <div className="title" to="/Home">
                 <h1>Dog Finder</h1>
-            </Link>
+            </div>
             <div className="right-content">
                 <button className="match" onClick={matchHandler}><span>match</span><HeartIcon/></button>
                 <button className="logout" onClick={logoutHandler}>Logout</button>

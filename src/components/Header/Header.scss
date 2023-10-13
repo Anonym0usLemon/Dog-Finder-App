@@ -20,7 +20,8 @@ header {
         padding-inline: 100px;
     }
 
-    a {
+    .title {
+        pointer-events: none;
         font-size: 12px;
         text-decoration: none;
         color: white;
