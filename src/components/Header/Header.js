@@ -17,7 +17,7 @@ const Header = (props) => {
 
     return (
         <header>
-            <Link to="/">
+            <Link to="/fetch-fe-challenge/Home">
                 <h1>Dog Finder</h1>
             </Link>
             <div className="right-content">
