@@ -1,3 +1,5 @@
+//For future use - adding a bio page for each dog
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

@@ -6,9 +6,9 @@ import Pagination from "./Pagination/Pagination";
 import "./Homepage.scss";
 import AscSymbol from "../../assets/AscSymbol";
 import DescSymbol from "../../assets/DescSymbol";
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import Match from "../Match/Match";
 
-const Homepage = () => {
+const Homepage = (props) => {
   const [dogs, setDogs] = useState([]);
   const [url, setUrl] = useState("");
 
@@ -19,70 +19,136 @@ const Homepage = () => {
   });
 
   const [queryObject, setQueryObject] = useState({
-    sortOrder: "sort=breed:asc", 
+    sortOrder: "sort=breed:asc",
     zip: "",
     breed: "",
     age: "",
-    pagination: ""
+    pagination: "",
   });
 
   const [selectedDogs, setSelectedDogs] = useState([]);
 
   function handleDogSelection(event) {
-    const {value, checked} = event.target;
+    const { value, checked } = event.target;
 
     if (checked) {
-        setSelectedDogs([...selectedDogs, value]);
+      setSelectedDogs([...selectedDogs, value]);
     } else {
-        setSelectedDogs(selectedDogs.filter((item) => item !== value));
+      setSelectedDogs(selectedDogs.filter((item) => item !== value));
     }
   }
 
-  useEffect(() => {
-    console.log("These are the selected dog IDs", selectedDogs); 
-  }, [selectedDogs])
+  const [match, setMatch] = useState(null);
 
+  useEffect(() => {
+    async function findMatch() {
+      try {
+        const getMatches = await axios.post(
+          "https://frontend-take-home-service.fetch.com/dogs/match",
+          selectedDogs,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+
+        const data = [getMatches.data.match];
+
+        const getMatch = await axios.post(
+          "https://frontend-take-home-service.fetch.com/dogs",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+
+        setMatch(getMatch.data);
+      } catch (error) {
+        console.error("Error fetching dogs", error);
+      }
+    }
+
+    if (props.matchTrigger && selectedDogs.length > 1) {
+      findMatch();
+    } else {
+      props.resetMatch(); 
+    }
+
+  }, [props.matchTrigger]);
+
+
+  // Reset Matches 
+  function resetMatch() {
+    setMatch(null);
+    setSelectedDogs([]);
+    props.resetMatch(); 
+  }
+
+  // Sort Order
   function sortHandler() {
     const newOrder =
-      queryObject.sortOrder === "sort=breed:asc" ? "sort=breed:desc" : "sort=breed:asc";
-    setQueryObject((prevState) => ({...prevState, sortOrder: newOrder}));
+      queryObject.sortOrder === "sort=breed:asc"
+        ? "sort=breed:desc"
+        : "sort=breed:asc";
+    setQueryObject((prevState) => ({ ...prevState, sortOrder: newOrder }));
   }
 
   // Search parameters
   function getSearchParams(formData) {
-    let breed = ""; 
+    let breed = "";
     if (formData.breed !== "") {
-        breed = `&breeds=${formData.breed}`
+      breed = `&breeds=${formData.breed}`;
     }
 
-    setQueryObject((prevState) => ({...prevState, zip: formData.zip, breed: breed, age: formData.age}));
+    setQueryObject((prevState) => ({
+      ...prevState,
+      zip: formData.zip,
+      breed: breed,
+      age: formData.age,
+    }));
   }
 
   // Pagination
   function getPagination(paginate) {
-    const size = pagination.nextLink.split("&").find(item => item.includes("size"));
+    
+    
+    if (paginate === "next" && pagination.nextLink) {      
+      const size = pagination.nextLink
+      .split("&")
+      .find((item) => item.includes("size"));
+      
+      const from = pagination.nextLink
+      .split("&")
+      .find((item) => item.includes("from"));
 
-    const from = pagination.nextLink.split("&").find(item => item.includes("from"));
-
-    if (paginate === "next") {
-        const nextLink = "&" + size + "&" + from;
-        setQueryObject((prevState) => ({...prevState, pagination: nextLink}));
+      const nextLink = "&" + size + "&" + from;
+      setQueryObject((prevState) => ({ ...prevState, pagination: nextLink }));
     }
+    
 
-    if (paginate === "prev") {
-        let prevSize = pagination.prevLink.split("&").find(item => item.includes("size"));
-        let prevFrom = pagination.prevLink.split("&").find(item => item.includes("from"));
-        const prevLink = "&" + prevSize + "&" + prevFrom;
-        setQueryObject((prevState) => ({...prevState, pagination: prevLink}));
+    if (paginate === "prev" && pagination.prevLink) {
+      console.log(pagination.prevLink); 
+      let prevSize = pagination.prevLink
+        .split("&")
+        .find((item) => item.includes("size"));
+      let prevFrom = pagination.prevLink
+        .split("&")
+        .find((item) => item.includes("from"));
+      const prevLink = "&" + prevSize + "&" + prevFrom;
+      setQueryObject((prevState) => ({ ...prevState, pagination: prevLink }));
     }
-
   }
 
   // Assemble the URL
   function buildUrl() {
     const baseUrl = "https://frontend-take-home-service.fetch.com/dogs/search";
     const searchParams = `?${queryObject.sortOrder}${queryObject.zip}${queryObject.breed}${queryObject.age}${queryObject.pagination}`;
-    setUrl(baseUrl + searchParams); 
+    setUrl(baseUrl + searchParams);
   }
 
   // Watch for changes in query object and update URL
@@ -119,10 +185,9 @@ const Homepage = () => {
           }
         );
 
-        console.log(dogs.data);
         setDogs(dogs.data);
       } catch (error) {
-        console.error("Error fetching dogs: *sad bark sounds*", error);
+        console.error("Error fetching dogs: ", error);
       }
     };
 
@@ -131,18 +196,27 @@ const Homepage = () => {
 
   return (
     <div className="home">
-      <div>
-        <FilterButton parseData={getSearchParams} />
-        <button onClick={sortHandler}>
-          {queryObject.sortOrder === "sort=breed:asc" ? <DescSymbol /> : <AscSymbol />}
+      {match && <Match dog={match[0]} reset={resetMatch}/>}
+      <div className="filters">
+        <FilterButton className="filter-button" parseData={getSearchParams} />
+        <button className="sort-button" onClick={sortHandler}>
+          {queryObject.sortOrder === "sort=breed:asc" ? (
+            <DescSymbol />
+          ) : (
+            <AscSymbol />
+          )}
         </button>
       </div>
 
-      {dogs.length > 0 ? (
-        dogs.map((dog) => <Dog key={dog.id} dog={dog} match={handleDogSelection}/>)
-      ) : (
-        <p>No results found</p>
-      )}
+      <div className="search-results">
+        {dogs.length > 0 ? (
+          dogs.map((dog) => (
+            <Dog key={dog.id} dog={dog} match={handleDogSelection} />
+          ))
+        ) : (
+          <p>No results found</p>
+        )}
+      </div>
 
       <Pagination paginationInfo={pagination} pagination={getPagination} />
     </div>

@@ -1,5 +1,9 @@
 .filter-component {
     box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 
     .close {
         width: 100%;
@@ -28,9 +32,16 @@
 
     form {
         padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 600px;
         display: grid;
         grid-template-columns: 1fr;
         gap: 30px;
+
+        @media only screen and (min-width: 600px) {
+            margin-top: 200px;
+        }
 
         .zip {
             width: 100%;
@@ -153,7 +164,7 @@
             button {
                 height: 70px;
                 background-color: white;
-                color: #FFB965;
+                color: #FFBF61;
                 font-size: 20px;
                 font-weight: bold;
                 border: none;

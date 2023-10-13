@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import CloseIcon from "../../../assets/CloseIcon";
 import Modal from "../../UI/Modal";
 import "./Filter.scss";
@@ -185,7 +185,7 @@ const Filter = (props) => {
 
       <form className="form" onSubmit={submitHandler}>
         <div className="zip">
-          <input type="text" id="zip" name="zip" placeholder="ZIP Code" onChange={(event) => {inputChangeHandler(event, "zip")}}/>
+          <input type="text" pattern="^[0-9]{5}$" id="zip" name="zip" placeholder=" Enter a 5-digit zip" onChange={(event) => {inputChangeHandler(event, "zip")}}/>
         </div>
 
         <div className="breed">

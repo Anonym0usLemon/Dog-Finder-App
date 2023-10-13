@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmptyHeart from "../../assets/EmptyHeart";
 import "./Dog.scss";
 
 const Dog = (props) => {
@@ -7,20 +8,29 @@ const Dog = (props) => {
   }
 
   return (
-    <div>
+    <div className="dog-tile">
       <div className="match-box">
-        <label></label>
         <input
           type="checkbox"
           id={props.dog.id}
           value={props.dog.id}
           onChange={handleMatch}
         />
+        <label htmlFor={props.dog.id}><EmptyHeart/></label>
       </div>
-      <Link to={`dog-details/${props.dog.id}`} className="dog-tile">
-        <div className="dog-tile-content">
+      
+      {/* insert this attribute to link to individual dog pages (for future use) to={`dog-details/${props.dog.id}`} */}
+      <Link className="dog-tile-content">
+        <div className="img-container">
           <img src={props.dog.img} alt="" />
-          <h1>{props.dog.name}</h1>
+        </div>
+        <div className="info">
+          <p className="name">{props.dog.name}</p>
+          <div className="middle-info">
+            <p>Age: {props.dog.age}</p>
+            <p>{props.dog.breed}</p>
+          </div>
+          <p className="zip">Zip Code: {props.dog.zip_code}</p>
         </div>
       </Link>
     </div>

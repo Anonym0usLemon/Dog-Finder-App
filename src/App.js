@@ -8,14 +8,24 @@ import DogDetails from "./components/DogDetails/DogDetails";
 import { useState } from "react";
 
 function App() {
+  const [matchTrigger, setMatchTrigger] = useState(false);
+
+  function matchHandler() {
+    setMatchTrigger(true)
+  }
+
+  function resetMatchHandler() {
+    setMatchTrigger(false);
+  }
+
   return (
     <>
       <main className="App">
         <BrowserRouter>
-          <Header />
+          <Header match={matchHandler}/>
           <Routes>
             <Route element={<PrivateRoutes />}>
-              <Route path="/" element={<Homepage />} />
+              <Route path="/" element={<Homepage matchTrigger={matchTrigger} resetMatch={resetMatchHandler}/>} />
               <Route path="/dog-details/:id" element={<DogDetails />} />
             </Route>
             <Route path="/login" element={<Login />} />

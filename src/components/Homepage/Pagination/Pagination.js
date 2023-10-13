@@ -4,8 +4,8 @@ import RightArrow from "../../../assets/RightArrow";
 import "./Pagination.scss";
 const Pagination = (props) => {
   const [disabled, setDisabled] = useState({
-    next: props.paginationInfo.nextLink,
-    prev: props.paginationInfo.prevLink,
+    next: undefined,
+    prev: undefined
   });
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Pagination = (props) => {
         next: props.paginationInfo.nextLink,
         prev: props.paginationInfo.prevLink
     });
-  }, [props.paginationInfo.nextLink, props.paginationInfo.prevLink]); 
+  }, [props.paginationInfo]); 
 
   function nextPage() {
     props.pagination("next");
@@ -36,7 +36,7 @@ const Pagination = (props) => {
       </button>
       <button
         onClick={nextPage}
-        disabled={disabled.next === undefined}
+        disabled={props.paginationInfo.total < 25}
         className={props.paginationInfo.nextLink !== undefined ? "" : "disabled"}
       >
         <span>Next</span>

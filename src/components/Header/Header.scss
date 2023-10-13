@@ -1,9 +1,96 @@
 header {
+    position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 70px;
     width: 100%;
-    background-color: #FFB965;
+    padding-inline: 20px;
+    box-sizing: border-box;
+    background-color: #FFBF61;
     color: white;
+
+    @media only screen and (min-width: 1090px) {
+        height: 90px;
+        padding-inline: 50px;
+        justify-content: flex-end;
+    }
+
+    @media only screen and (min-width: 1700px) {
+        padding-inline: 100px;
+    }
+
+    a {
+        font-size: 12px;
+        text-decoration: none;
+        color: white;
+
+        @media only screen and (min-width: 500px) {
+            font-size: 16px;
+        }
+
+        @media only screen and (min-width: 1090px) {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .right-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        @media only screen and (min-width: 500px) {
+            gap: 20px;
+        }
+
+        .match {
+            background-color: transparent;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease-in-out;
+
+            @media only screen and (min-width: 500px) {
+                font-size: 18px;
+            }
+    
+            &:hover {
+                transform: scale(0.95);
+            }
+    
+            svg {
+                fill: #D41D6D;
+                height: 30px;
+
+                @media only screen and (min-width: 500px) {
+                    height: 35px;
+                }
+            }
+        }
+
+        .logout {
+            background-color: transparent;
+            border: none;
+            color: #7F4C26;
+            font-size: 16px;
+            font-weight: bold;
+            border-left: 2px solid #7F4C26;
+            height: 35px;
+            padding-left: 10px;
+
+            @media only screen and (min-width: 500px) {
+                font-size: 18px;
+                padding-left: 20px;
+            }
+        }
+    }
 }

@@ -1,0 +1,53 @@
+.match-modal {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .match-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+
+        h1 {
+            font-size: 54px;
+            text-align: center;
+            word-spacing: 2px;
+
+            em {
+                color: #FFBF61;
+                font-weight: 800;
+                letter-spacing: 4px;
+            }
+        }
+
+        .dog-tile {
+            .match-box {
+                display: none;
+            }
+        }
+
+        button {
+            background-color: #FFBF61;
+            border: none;
+            font-size: 28px;
+            height: 55px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-weight: 800;
+            margin-top: 50px;
+            color: white;
+            border-radius: 50px;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                transform: scale(0.97);
+                background-color: #7F4C26;
+            }
+        }
+    }
+}

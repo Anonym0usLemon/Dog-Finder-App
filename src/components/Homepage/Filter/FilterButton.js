@@ -20,7 +20,7 @@ const FilterButton = (props) => {
   return (
     <>
       {filterToggle && <Filter parseData={receiveData} noFilter={hideFilter}/>}
-      <button onClick={showFilter}>
+      <button className={props.className} onClick={showFilter}>
         Filter <FilterIcon />
       </button>
     </>
