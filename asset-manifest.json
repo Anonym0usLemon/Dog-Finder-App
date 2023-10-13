@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/fetch-fe-challenge/static/css/main.06cf20aa.css",
-    "main.js": "/fetch-fe-challenge/static/js/main.ee53735d.js",
+    "main.css": "/fetch-fe-challenge/static/css/main.f4d67fe5.css",
+    "main.js": "/fetch-fe-challenge/static/js/main.0f5f472a.js",
     "index.html": "/fetch-fe-challenge/index.html",
-    "main.06cf20aa.css.map": "/fetch-fe-challenge/static/css/main.06cf20aa.css.map",
-    "main.ee53735d.js.map": "/fetch-fe-challenge/static/js/main.ee53735d.js.map"
+    "main.f4d67fe5.css.map": "/fetch-fe-challenge/static/css/main.f4d67fe5.css.map",
+    "main.0f5f472a.js.map": "/fetch-fe-challenge/static/js/main.0f5f472a.js.map"
   },
   "entrypoints": [
-    "static/css/main.06cf20aa.css",
-    "static/js/main.ee53735d.js"
+    "static/css/main.f4d67fe5.css",
+    "static/js/main.0f5f472a.js"
   ]
 }
