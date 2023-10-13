@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found</title>
   </head>
   <body>
     <script>
-      // Redirect to the main `index.html` file when encountering a 404 error
-      window.location.replace("/fetch-fe-challenge/Home");
+      // Get the current URL
+      const currentURL = window.location.href;
+
+      // If the URL is a GitHub Pages URL
+      if (
+        currentURL.includes("anonym0uslemon.github.io/your-repo-name")
+      ) {
+        // Extract the part of the URL that comes after your repository name
+        const relativePath = currentURL.split(
+          "your-github-username.github.io/your-repo-name"
+        )[1];
+
+        // Redirect to the relative path
+        window.location.href = `https://anonym0uslemon.github.io/fetch-fe-challenge#${relativePath}`;
+      }
     </script>
   </body>
 </html>
