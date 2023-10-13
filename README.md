@@ -2,9 +2,10 @@
 
 Welcome to my Fetch Frontend Take-Home Exercise project! In this project, I've created a web application that helps dog lovers find shelter dogs and potentially give them a loving home. The application includes various features to make this process enjoyable and user-friendly.
 
+[Live Demo](https://anonym0uslemon.github.io/fetch-fe-challenge/)
+
 Here are the key functionalities I've implemented:
 
-[Live Demo](https://anonym0uslemon.github.io/fetch-fe-challenge/)
 
 ## Features 
 
