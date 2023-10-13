@@ -25,10 +25,10 @@ function App() {
           <Header match={matchHandler}/>
           <Routes>
             <Route element={<PrivateRoutes />}>
-              <Route path="https://anonym0uslemon.github.io/fetch-fe-challenge/" element={<Homepage matchTrigger={matchTrigger} resetMatch={resetMatchHandler}/>} />
+              <Route path="https://anonym0uslemon.github.io/fetch-fe-challenge/Home" element={<Homepage matchTrigger={matchTrigger} resetMatch={resetMatchHandler}/>} />
               <Route path="https://anonym0uslemon.github.io/fetch-fe-challenge/dog-details/:id" element={<DogDetails />} />
             </Route>
-            <Route path="https://anonym0uslemon.github.io/fetch-fe-challenge/login" element={<Login />} />
+            <Route path="https://anonym0uslemon.github.io/fetch-fe-challenge/" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </main>
