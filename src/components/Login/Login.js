@@ -66,7 +66,7 @@ const Login = () => {
             if (response.data === "OK") {
                 ctx.onLogin(); 
                 console.log(ctx.isLoggedIn);
-                navigate("/"); 
+                navigate("https://anonym0uslemon.github.io/fetch-fe-challenge/"); 
             }
 
         } catch (error) {
