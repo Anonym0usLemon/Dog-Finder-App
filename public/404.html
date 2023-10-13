@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Not Found</title>
-  </head>
-  <body>
-    <script>
-      // Get the current URL
-      const currentURL = window.location.href;
+    <meta charset="utf-8" />
+    <title>React Router</title>
+    <script type="text/javascript">
+      var pathSegmentsToKeep = 1;
 
-      // If the URL is a GitHub Pages URL
-      if (
-        currentURL.includes("anonym0uslemon.github.io/your-repo-name")
-      ) {
-        // Extract the part of the URL that comes after your repository name
-        const relativePath = currentURL.split(
-          "your-github-username.github.io/your-repo-name"
-        )[1];
-
-        // Redirect to the relative path
-        window.location.href = `https://anonym0uslemon.github.io/fetch-fe-challenge#${relativePath}`;
-      }
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          "//" +
+          l.hostname +
+          (l.port ? ":" + l.port : "") +
+          l.pathname
+            .split("/")
+            .slice(0, 1 + pathSegmentsToKeep)
+            .join("/") +
+          "/?/" +
+          l.pathname.slice(1).split("/").slice(pathSegmentsToKeep).join("/").replace(/&/g, "~and~") +
+          (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash
+      );
     </script>
-  </body>
+  </head>
+  <body></body>
 </html>
