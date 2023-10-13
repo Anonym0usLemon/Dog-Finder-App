@@ -109,7 +109,7 @@ const breeds = [
 function formReducer(state, action) {
   // Zip
   if (action.type === "ZIP") {
-    return {...state, zip: `zipCodes=${action.value}`};
+    return {...state, zip: `&zipCodes=${action.value}`};
   }
 
   // Breed
@@ -121,19 +121,19 @@ function formReducer(state, action) {
   if (action.type === "AGE") {
 
     if (action.value === "puppy") {
-      return {...state, age: "ageMax=2"}
+      return {...state, age: "&ageMax=2"}
     }
 
     if (action.value === "young") {
-      return {...state, age: "ageMin=2&ageMax=5"}
+      return {...state, age: "&ageMin=2&ageMax=5"}
     }
 
     if (action.value === "adult") {
-      return {...state, age: "ageMin=5&ageMax=7"}
+      return {...state, age: "&ageMin=5&ageMax=7"}
     }
 
     if (action.value === "senior") {
-      return {...state, age: "ageMin=7"}
+      return {...state, age: "&ageMin=7"}
     }
   }
 

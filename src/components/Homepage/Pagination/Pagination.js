@@ -16,8 +16,6 @@ const Pagination = (props) => {
     });
   }, [props.paginationInfo.nextLink, props.paginationInfo.prevLink]); 
 
-  console.log(disabled.prev)
-
   function nextPage() {
     props.pagination("next");
   }
@@ -31,7 +29,7 @@ const Pagination = (props) => {
       <button
         onClick={previousPage}
         disabled={disabled.prev === undefined}
-        className={props.paginationInfo.prevLink !== null ? "disabled" : ""}
+        className={props.paginationInfo.prevLink !== undefined ? "" : "disabled"}
       >
         <LeftArrow />
         <span>Prev</span>
@@ -39,7 +37,7 @@ const Pagination = (props) => {
       <button
         onClick={nextPage}
         disabled={disabled.next === undefined}
-        className={props.paginationInfo.nextLink !== null ? "" : "disabled"}
+        className={props.paginationInfo.nextLink !== undefined ? "" : "disabled"}
       >
         <span>Next</span>
         <RightArrow />

@@ -1,44 +1,98 @@
-import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Dog from "./Dog";
 import FilterButton from "./Filter/FilterButton";
 import Pagination from "./Pagination/Pagination";
-import "./Homepage.scss"; 
+import "./Homepage.scss";
+import AscSymbol from "../../assets/AscSymbol";
+import DescSymbol from "../../assets/DescSymbol";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 const Homepage = () => {
   const [dogs, setDogs] = useState([]);
-  const [url, setUrl] = useState(
-    "https://frontend-take-home-service.fetch.com/dogs/search"
-  );
+  const [url, setUrl] = useState("");
+
   const [pagination, setPagination] = useState({
     total: 0,
     nextLink: "",
     prevLink: "",
   });
 
+  const [queryObject, setQueryObject] = useState({
+    sortOrder: "sort=breed:asc", 
+    zip: "",
+    breed: "",
+    age: "",
+    pagination: ""
+  });
+
+  const [selectedDogs, setSelectedDogs] = useState([]);
+
+  function handleDogSelection(event) {
+    const {value, checked} = event.target;
+
+    if (checked) {
+        setSelectedDogs([...selectedDogs, value]);
+    } else {
+        setSelectedDogs(selectedDogs.filter((item) => item !== value));
+    }
+  }
+
+  useEffect(() => {
+    console.log("These are the selected dog IDs", selectedDogs); 
+  }, [selectedDogs])
+
+  function sortHandler() {
+    const newOrder =
+      queryObject.sortOrder === "sort=breed:asc" ? "sort=breed:desc" : "sort=breed:asc";
+    setQueryObject((prevState) => ({...prevState, sortOrder: newOrder}));
+  }
+
   // Search parameters
-  let searchParams = "";
   function getSearchParams(formData) {
-    console.log(formData);
-    searchParams = `?${formData.zip}${
-      formData.breed !== "" ? `&breeds=${formData.breed}` : ""
-    }${formData.age !== "" ? `&${formData.age}` : ""}`;
-    setUrl(
-      `https://frontend-take-home-service.fetch.com/dogs/search/${searchParams}`
-    );
+    let breed = ""; 
+    if (formData.breed !== "") {
+        breed = `&breeds=${formData.breed}`
+    }
+
+    setQueryObject((prevState) => ({...prevState, zip: formData.zip, breed: breed, age: formData.age}));
   }
 
   // Pagination
   function getPagination(paginate) {
-    console.log(paginate)
+    const size = pagination.nextLink.split("&").find(item => item.includes("size"));
+
+    const from = pagination.nextLink.split("&").find(item => item.includes("from"));
+
+    if (paginate === "next") {
+        const nextLink = "&" + size + "&" + from;
+        setQueryObject((prevState) => ({...prevState, pagination: nextLink}));
+    }
+
+    if (paginate === "prev") {
+        let prevSize = pagination.prevLink.split("&").find(item => item.includes("size"));
+        let prevFrom = pagination.prevLink.split("&").find(item => item.includes("from"));
+        const prevLink = "&" + prevSize + "&" + prevFrom;
+        setQueryObject((prevState) => ({...prevState, pagination: prevLink}));
+    }
+
   }
 
-  // Get app data
+  // Assemble the URL
+  function buildUrl() {
+    const baseUrl = "https://frontend-take-home-service.fetch.com/dogs/search";
+    const searchParams = `?${queryObject.sortOrder}${queryObject.zip}${queryObject.breed}${queryObject.age}${queryObject.pagination}`;
+    setUrl(baseUrl + searchParams); 
+  }
+
+  // Watch for changes in query object and update URL
+  useEffect(() => {
+    buildUrl();
+  }, [queryObject]);
+
+  // Get dogs
   useEffect(() => {
     const fetchDogs = async () => {
-      console.log(url);
-
       try {
         // Gets dog IDs
         const response = await axios.get(url, {
@@ -53,7 +107,6 @@ const Homepage = () => {
           prevLink: response.data.prev,
         });
 
-
         // Uses dog IDs to get dog objects
         const dogs = await axios.post(
           "https://frontend-take-home-service.fetch.com/dogs",
@@ -66,6 +119,7 @@ const Homepage = () => {
           }
         );
 
+        console.log(dogs.data);
         setDogs(dogs.data);
       } catch (error) {
         console.error("Error fetching dogs: *sad bark sounds*", error);
@@ -75,19 +129,22 @@ const Homepage = () => {
     fetchDogs();
   }, [url]);
 
-  
-
   return (
     <div className="home">
-      <FilterButton parseData={getSearchParams} />
+      <div>
+        <FilterButton parseData={getSearchParams} />
+        <button onClick={sortHandler}>
+          {queryObject.sortOrder === "sort=breed:asc" ? <DescSymbol /> : <AscSymbol />}
+        </button>
+      </div>
 
       {dogs.length > 0 ? (
-        dogs.map((dog) => <Dog key={dog.id} dog={dog} />)
+        dogs.map((dog) => <Dog key={dog.id} dog={dog} match={handleDogSelection}/>)
       ) : (
         <p>No results found</p>
       )}
 
-      <Pagination paginationInfo={pagination} pagination={getPagination}/>
+      <Pagination paginationInfo={pagination} pagination={getPagination} />
     </div>
   );
 };
