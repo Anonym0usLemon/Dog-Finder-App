@@ -19,7 +19,6 @@ const DogDetails = () => {
                 });
 
                 setDogInfo(response.data[0]); 
-                console.log(dogInfo)
             }
             catch(error) {
                 console.log("Error fetching dog data: *sad bark* " + error)

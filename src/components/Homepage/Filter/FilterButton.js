@@ -2,7 +2,7 @@ import { useState } from "react";
 import FilterIcon from "../../../assets/FilterIcon";
 import Filter from "./Filter";
 
-const FilterButton = () => {
+const FilterButton = (props) => {
   const [filterToggle, setFilterToggle] = useState(false);
 
   function showFilter() {
@@ -13,9 +13,13 @@ const FilterButton = () => {
     setFilterToggle(false);
   }
 
+  function receiveData(formState) {
+    props.parseData(formState); 
+  }
+
   return (
     <>
-      {filterToggle && <Filter noFilter={hideFilter}/>}
+      {filterToggle && <Filter parseData={receiveData} noFilter={hideFilter}/>}
       <button onClick={showFilter}>
         Filter <FilterIcon />
       </button>

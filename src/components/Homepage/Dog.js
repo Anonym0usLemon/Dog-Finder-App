@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "./Dog.scss"; 
 
 const Dog = (props) => {
-    console.log(props.dog); 
 
     return (
         <Link to={`dog-details/${props.dog.id}`} className="dog-tile">            
