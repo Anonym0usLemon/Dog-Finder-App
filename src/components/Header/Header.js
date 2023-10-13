@@ -17,7 +17,7 @@ const Header = (props) => {
 
     return (
         <header>
-            <div className="title" to="/Home">
+            <div className="title">
                 <h1>Dog Finder</h1>
             </div>
             <div className="right-content">
