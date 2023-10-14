@@ -132,7 +132,6 @@ const Homepage = (props) => {
     
 
     if (paginate === "prev" && pagination.prevLink) {
-      console.log(pagination.prevLink); 
       let prevSize = pagination.prevLink
         .split("&")
         .find((item) => item.includes("size"));
