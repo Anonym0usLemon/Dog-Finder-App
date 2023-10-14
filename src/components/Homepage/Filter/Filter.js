@@ -166,6 +166,7 @@ const Filter = (props) => {
     dispatchFormState({}); 
     props.noFilter(); 
     props.parseData(formState); 
+    window.location.reload(); 
   }
 
   function submitHandler(event) {
