@@ -3,10 +3,7 @@
 ## Project Description:
 A responsive web application that helps dog lovers find shelter dogs and potentially give them a loving home. The application includes various features to make this process enjoyable and user-friendly.
 
-[Live Demo](https://anonym0uslemon.github.io/fetch-fe-challenge/)
-
 Here are the key functionalities I've implemented:
-
 
 ## Features 
 
@@ -38,8 +35,6 @@ Here are the key functionalities I've implemented:
 
 
 ## Usage 
-
-To use this application, you can visit the [deployed site](https://anonym0uslemon.github.io/fetch-fe-challenge/) and follow these steps: 
 
 1. Log in by providing your name and email.
 2. Start searching for dogs using the filters.
