@@ -1,5 +1,6 @@
 # Project Name: Dog Finder App
 
+## Project Description:
 A responsive web application that helps dog lovers find shelter dogs and potentially give them a loving home. The application includes various features to make this process enjoyable and user-friendly.
 
 [Live Demo](https://anonym0uslemon.github.io/fetch-fe-challenge/)
