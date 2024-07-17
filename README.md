@@ -1,6 +1,6 @@
-# Fetch Frontend Take-Home Exercise
+# Project Name: Dog Finder App
 
-Welcome to my Fetch Frontend Take-Home Exercise project! In this project, I've created a web application that helps dog lovers find shelter dogs and potentially give them a loving home. The application includes various features to make this process enjoyable and user-friendly.
+A responsive web application that helps dog lovers find shelter dogs and potentially give them a loving home. The application includes various features to make this process enjoyable and user-friendly.
 
 [Live Demo](https://anonym0uslemon.github.io/fetch-fe-challenge/)
 
@@ -73,13 +73,6 @@ To use this application, you can visit the [deployed site](https://anonym0uslemo
 2. Navigate to the project directory using your terminal.
 3. Run `npm install` to install the project dependencies. 
 4. Run `npm start` to start the development server and open the app in your web browser. 
-
-
-## Feedback
-
-I appreciate your time reviewing this project and considering me as an applicant. If you have any questions, suggestions, or feedback please feel free to reach out to me. I look forward to discussing and improving this application together. 
-
-Happy dog searching! 🐶🏡
 
 
 
